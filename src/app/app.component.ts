@@ -23,6 +23,14 @@ export class AppComponent {
   ];
 
   onReset(index: number) {
-    this.historicTemperatures[index] = 18;
+    // this.historicTemperatures[index] = 18;
+    /*
+    The line above was not resetting the temperature to the default value of 18 because Angular is designed to rerun the pipes only when the reference of the value changes, not on every render.
+    Here, we were changing the value inside the array, so its reference was not changing, and it was not working.
+    To fix this, we create a new array with the updated value to change the reference.
+    */
+    const newTemps = [...this.historicTemperatures];
+    newTemps[index] = 18;
+    this.historicTemperatures = newTemps;
   }
 }
